@@ -4,7 +4,9 @@ const {PORT, JWT_KEY} = require('./config/serverConfig')
 const app= express();
 //const UserRepository = require('./repository/user-repository')
 const apiRoutes= require('./routes/index')
+const {User,Role}=require('./models/index')
 const db=require('./models/index')
+
 //const UserService= require('./services/user-service')
 
 
@@ -18,6 +20,9 @@ const prepareAndStartServer= ()=>{
     app.listen(PORT,async ()=>{
         console.log("server started")
 
+        const u1= await User.findByPk(5);
+        const r1=await Role.findByPk(2); 
+        u1.addRole(r1);
         if(process.env.DB_SYNC){
             db.sequelize.sync({alter:true})
         }

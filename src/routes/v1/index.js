@@ -8,4 +8,5 @@ router.post('/signin',AuthRequestValidator.validateUserAuth,UserController.signI
 
 router.get('/isAuthenticated',UserController.isAuthenticated)
 
-module.exports=router
+router.get('/isAdmin',AuthRequestValidator.validateIsAdminRequest,UserController.isAdmin)
+module.exports=router 

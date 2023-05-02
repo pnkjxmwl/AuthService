@@ -1,4 +1,4 @@
-const {User} =require('../models/index')
+const {User,Role} =require('../models/index')
 
 class UserRepository{
 
@@ -36,6 +36,22 @@ class UserRepository{
             console.log("something wrong in user repo");
             throw error
         }
+
+    }
+    async isAdmin(userId)
+    {
+        try {
+            const user=await User.findByPk(userId)
+            const adminRole= await Role.findOne({
+                where:{
+                    name:"ADMIN"
+                }
+            })
+           return user.hasRole(adminRole)
+         } catch (error) {
+             console.log("something wrong in user repo");
+             throw error
+         }
 
     }
     async getByEmail(email){
