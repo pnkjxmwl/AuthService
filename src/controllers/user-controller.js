@@ -1,3 +1,4 @@
+const { response } = require('express')
 const UserService = require('../services/user-service')
 
 const userService =new UserService()
@@ -42,7 +43,29 @@ const signIn= async(req,resp)=>{
         })
     }
 }
+const isAuthenticated= async (req,resp)=>{
+
+    try {
+        const token=req.headers['x-access-token'];
+        const response=await userService.isAuthenticated(token)     
+        return resp.status(200).json({
+            success:true,
+            err:{},
+            data:response,
+            message:'user is authenticated and token is valid'
+        })
+    } catch (error) {
+        console.log(error);
+        return resp.status(500).json({
+            data:{},
+            success:false,
+            err:error
+        })
+    }
+
+}
 module.exports={
     create,
-    signIn
+    signIn,
+    isAuthenticated
 }

@@ -8,10 +8,11 @@ const validateUserAuth= (req,resp,next)=>{
             err: 'email or password missing '
         })
     }
+    next()
 }
 
 module.exports={
 
     validateUserAuth
-    
+
 }
