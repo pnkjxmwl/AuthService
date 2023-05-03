@@ -2,6 +2,7 @@ const jwt= require('jsonwebtoken')
 const UserRepository =require('../repository/user-repository')
 const {JWT_KEY} =require("../config/serverConfig")
 const bcrypt= require('bcrypt')
+const AppErrors = require('../utils/error-handler')
 class UserService {
 
     constructor(){
@@ -15,7 +16,18 @@ class UserService {
             return user;
         } 
         catch (error) {
-            throw error
+            console.log(error.name)
+            if(error.name=='SequelizeValidationError')
+             {
+                    throw error;
+             }
+            throw new AppErrors(
+                'ServerError',
+                'Something wrong in service',
+                'logical issue',
+                500
+            )
+        
         }
     }
     async signIn(email,plainPassword)

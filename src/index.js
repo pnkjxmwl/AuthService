@@ -20,9 +20,9 @@ const prepareAndStartServer= ()=>{
     app.listen(PORT,async ()=>{
         console.log("server started")
 
-        const u1= await User.findByPk(5);
-        const r1=await Role.findByPk(2); 
-        u1.addRole(r1);
+        // const u1= await User.findByPk(5);
+        // const r1=await Role.findByPk(2); 
+        // u1.addRole(r1);
         if(process.env.DB_SYNC){
             db.sequelize.sync({alter:true})
         }
