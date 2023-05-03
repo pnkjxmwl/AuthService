@@ -36,11 +36,13 @@ const signIn= async(req,resp)=>{
         })
 
     } catch (error) {
-        console.log(error);
-        return resp.status(500).json({
+        //console.log(error);
+       
+        return resp.status(error.statusCode).json({
             data:{},
             success:false,
-            err:error
+            message:error.message,
+            err:error.explanation
         })
     }
 }

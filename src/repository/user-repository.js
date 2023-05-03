@@ -1,4 +1,6 @@
+const { StatusCodes } = require('http-status-codes');
 const {User,Role} =require('../models/index');
+const ClientError = require('../utils/client-error');
 const ValidationError = require('../utils/validation-error');
 
 class UserRepository{
@@ -66,6 +68,17 @@ class UserRepository{
                     email:email
                 }
             })
+            if(!user){
+                
+                throw new ClientError(
+                    {
+                    name:'AttributeNotFound',
+                    message:'Invalid Email Sent in Request',
+                    explanation:'Please check if email is registered',
+                    statusCode:StatusCodes.NOT_FOUND
+                    }
+                )
+            }
             return user
          } catch (error) {
              console.log("something wrong in user repo");
