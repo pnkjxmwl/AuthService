@@ -1,4 +1,4 @@
-# Project Name: Airline Management System - Auth Service
+# Airline Management System - Auth Service
 ## Description:  
 The Airline Management System is a comprehensive backend project that follows a microservices architecture. This particular microservice, the Auth Service, is responsible for authenticating and authorizing incoming requests. It ensures the security and integrity of the system by validating user credentials and managing user roles.
 ## Key Features: 
